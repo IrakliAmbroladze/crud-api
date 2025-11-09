@@ -1,4 +1,4 @@
-import { IncomingMessage, ServerResponse } from "node:http";
+import type { IncomingMessage, ServerResponse } from "node:http";
 import { usersHandler } from "./routes/users";
 
 export function createApp(basePath = "/api") {

@@ -1,17 +1,22 @@
 import { IncomingMessage } from "node:http";
 
-export const parseJsonBody = async (req: IncomingMessage) => {
+export async function parseJsonBody<T>(req: IncomingMessage): Promise<T> {
   return new Promise((resolve, reject) => {
-    let body = "";
-    req.on("data", (chunk) => (body += chunk));
+    let data = "";
+
+    req.on("data", (chunk) => {
+      data += chunk;
+    });
+
     req.on("end", () => {
-      if (!body) return resolve(null);
       try {
-        resolve(JSON.parse(body));
-      } catch (err) {
-        reject(new Error("Invalid JSON"));
+        const parsed = JSON.parse(data || "{}");
+        resolve(parsed);
+      } catch (error) {
+        reject(error);
       }
     });
-    req.on("error", reject);
+
+    req.on("error", (err) => reject(err));
   });
-};
+}
