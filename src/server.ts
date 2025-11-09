@@ -1,13 +1,13 @@
-import http from "node:http";
+import { createServer, type Server } from "node:http";
 import { createApp } from "./app";
 
-export function startServer(port: number) {
+export const startServer = async (port: number) => {
   const app = createApp("/api");
-  const server = http.createServer(app);
-  return new Promise<http.Server>((resolve) => {
+  const server = createServer(app);
+  return new Promise<Server>((resolve) => {
     server.listen(port, () => {
       console.log(`Server listening on port ${port}`);
       resolve(server);
     });
   });
-}
+};
