@@ -21,7 +21,9 @@
     "test": "cross-env NODE_ENV=test jest --runInBand --detectOpenHandles",
     "start:dev": "cross-env NODE_ENV=development ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "esbuild src/index.ts --bundle --platform=node --target=node20 --outfile=dist/index.js",
-    "start:prod": "npm run build && cross-env NODE_ENV=production node dist/index.js"
+    "start:prod": "npm run build && cross-env NODE_ENV=production node dist/index.js",
+    "build:multi": "esbuild src/cluster.ts --bundle --platform=node --target=node20 --outfile=dist/cluster.js",
+    "start:multi": "npm run build:multi && cross-env NODE_ENV=production node dist/cluster.js"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
