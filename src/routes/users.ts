@@ -2,6 +2,7 @@ import { IncomingMessage, ServerResponse } from "node:http";
 import { parseJsonBody } from "../utils/json";
 import { userService } from "../services/userService";
 import { User } from "../types/user";
+import { isUuid } from "../utils/validateUuid";
 
 export const usersHandler = async (
   req: IncomingMessage,
@@ -38,6 +39,14 @@ export const usersHandler = async (
 
     if (req.method === "GET" && parts.length === 2) {
       const id = parts[1];
+
+      if (!isUuid(id)) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        return res.end(
+          JSON.stringify({ message: "Invalid userId format (not UUID)" }),
+        );
+      }
+
       const user = await userService.getById(id);
       if (!user) {
         res.writeHead(404, { "Content-Type": "application/json" });
@@ -49,6 +58,14 @@ export const usersHandler = async (
 
     if (req.method === "PUT" && parts.length === 2) {
       const id = parts[1];
+
+      if (!isUuid(id)) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        return res.end(
+          JSON.stringify({ message: "Invalid userId format (not UUID)" }),
+        );
+      }
+
       const body = await parseJsonBody<Partial<Omit<User, "id">>>(req);
 
       const updated = await userService.update(id, body);
@@ -64,6 +81,14 @@ export const usersHandler = async (
 
     if (req.method === "DELETE" && parts.length === 2) {
       const id = parts[1];
+
+      if (!isUuid(id)) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        return res.end(
+          JSON.stringify({ message: "Invalid userId format (not UUID)" }),
+        );
+      }
+
       const removed = await userService.delete(id);
       if (!removed) {
         res.writeHead(404, { "Content-Type": "application/json" });
