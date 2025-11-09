@@ -1,0 +1,44 @@
+{
+  "name": "crud-api",
+  "version": "1.0.0",
+  "description": "The following nodejs application is responsible for creating API for CRUD operations",
+  "keywords": [
+    "node",
+    "crud"
+  ],
+  "homepage": "https://github.com/IrakliAmbroladze/crud-api#readme",
+  "bugs": {
+    "url": "https://github.com/IrakliAmbroladze/crud-api/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IrakliAmbroladze/crud-api.git"
+  },
+  "license": "ISC",
+  "author": "Irakli Ambroladze",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test jest --runInBand --detectOpenHandles",
+    "start:dev": "cross-env NODE_ENV=development ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "esbuild src/index.ts --bundle --platform=node --target=node20 --outfile=dist/index.js",
+    "start:prod": "npm run build && cross-env NODE_ENV=production node dist/index.js",
+    "build:multi": "esbuild src/cluster.ts --bundle --platform=node --target=node20 --outfile=dist/cluster.js",
+    "start:multi": "npm run build:multi && cross-env NODE_ENV=production node dist/cluster.js"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.10.0",
+    "@types/supertest": "^6.0.3",
+    "esbuild": "^0.26.0",
+    "jest": "^30.2.0",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.5",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "cross-env": "^10.1.0",
+    "dotenv": "^17.2.3"
+  }
+}
