@@ -1,0 +1,32 @@
+{
+  "name": "crud-api",
+  "version": "1.0.0",
+  "description": "The following nodejs application is responsible for creating API for CRUD operations",
+  "keywords": [
+    "node",
+    "crud"
+  ],
+  "homepage": "https://github.com/IrakliAmbroladze/crud-api#readme",
+  "bugs": {
+    "url": "https://github.com/IrakliAmbroladze/crud-api/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IrakliAmbroladze/crud-api.git"
+  },
+  "license": "ISC",
+  "author": "Irakli Ambroladze",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "ts-node-dev --respawn --transpile-only src/index.ts"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
+  }
+}
